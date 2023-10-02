@@ -67,7 +67,7 @@ export const Home = () => {
         placeholder={props.placeholder}
         style={props.style}
         defaultActiveFirstOption={false}
-        suffixIcon={<SearchOutlined />}
+        suffixIcon={<SearchOutlined style={{ color: "#fff" }} />}
         filterOption={false}
         onSearch={handleSearch}
         onChange={handleChange}
@@ -91,7 +91,7 @@ export const Home = () => {
           <SearchInput
             placeholder="Search for a country..."
             style={{
-              width: 200,
+              width: 300,
             }}
           />
           <Select

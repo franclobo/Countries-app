@@ -1,5 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { Home } from './components/home'
+import { Pages } from './components/pages'
+import { DataProvider } from './context/dataProvider'
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.scss'
 
@@ -8,9 +10,10 @@ function App() {
   return (
     <>
       <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
+        <DataProvider>
+          <Home />
+          <Pages />
+        </DataProvider>
       </Router>
     </>
   )
