@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { SearchOutlined } from "@ant-design/icons";
 import { Select } from "antd";
@@ -6,6 +7,7 @@ import jsonp from "fetch-jsonp";
 import qs from "qs";
 
 export const Home = () => {
+  const location = useLocation();
   const onChange = (value) => {
     console.log(`selected ${value}`);
   };
@@ -87,7 +89,8 @@ export const Home = () => {
         <p>Dark Mode</p>
       </header>
       <main>
-        <form>
+        { location.pathname === "/" && (
+          <form>
           <SearchInput
             placeholder="Search for a country..."
             style={{
@@ -125,6 +128,7 @@ export const Home = () => {
             ]}
           />
         </form>
+        )}
       </main>
     </>
   );
