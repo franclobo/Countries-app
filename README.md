@@ -31,6 +31,10 @@ Users should be able to:
 
 ### Screenshot
 
+| Desktop version | Mobile version |
+|---|---|
+| ![image](https://github.com/franclobo/Countries-app/assets/58642949/44cc8bf7-5680-427c-9ab3-71eed302a373) | ![image](https://github.com/franclobo/Countries-app/assets/58642949/695fea38-bee5-414e-9554-85e4813021af) |
+
 
 
 ### Links
