@@ -16,6 +16,11 @@ body {
   height: 100%;
 }
 
+.light-mode {
+  background-color: var(--light-mode-background);
+  color: var(--light-mMode-text);
+}
+
 header {
   background-color: var(--dark-mode-elements);
   position: fixed;
@@ -35,6 +40,29 @@ header {
   }
   p {
     margin: 0;
+  }
+  .btn__dark {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--dark-mode-elements);
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    height: 30px;
+    width: 150px;
+  }
+  .btn__light {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--light-mode-background);
+    color: var(--light-mMode-text);
+    border-radius: 5px;
+    overflow: hidden;
+    height: 30px;
+    width: 150px;
   }
 }
 
@@ -86,8 +114,43 @@ form {
   color: #fff;
 }
 
+/* Light mode styles */
+
+/* Estilos de light mode */
+.light-mode .ant-select-show-search:where(.css-dev-only-do-not-override-pr0fja).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  background-color: var(--light-mode-background);
+  color: var(--light-mMode-text);
+}
+
+.light-mode :where(.css-dev-only-do-not-override-pr0fja).ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
+  background-color: var(--light-mode-background);
+  color: var(--light-mMode-text);
+}
+
+.light-mode :where(.css-dev-only-do-not-override-pr0fja).ant-select .ant-select-arrow {
+  color: var(--light-mMode-text);
+}
+
+.light-mode :where(.css-dev-only-do-not-override-pr0fja).ant-select-dropdown .ant-select-item-option-content {
+  color: var(--light-mMode-text);
+  background-color: var(--light-mode-background);
+}
+
+.light-mode :where(.css-dev-only-do-not-override-pr0fja).ant-select-dropdown {
+  background-color: var(--light-mode-background);
+  border-color: var(--light-mode-background);
+}
+
+.light-mode :where(.css-dev-only-do-not-override-pr0fja)[class^="ant-input"] [class^="ant-input"],
+.light-mode :where(.css-dev-only-do-not-override-pr0fja)[class*=" ant-input"] [class^="ant-input"],
+.light-mode :where(.css-dev-only-do-not-override-pr0fja)[class^="ant-input"] [class*=" ant-input"],
+.light-mode :where(.css-dev-only-do-not-override-pr0fja)[class*=" ant-input"] [class*=" ant-input"] {
+  box-sizing: border-box;
+  background-color: var(--light-mode-background);
+  color: var(--light-mMode-text);
+}
+
 .countries {
-  top: 200px;
   margin: 130px 50px 0 50px;
   padding: 20px 0;
   display: grid;
@@ -124,8 +187,19 @@ form {
   }
 }
 
+.light-mode .country {
+  background-color: var(--light-mode-background);
+  color: var(--light-mMode-text);
+}
+
 section {
+  display: flex;
   width: 100vw;
+}
+
+.light-mode section {
+  background-color: var(--light-mode-input);
+  color: var(--light-mMode-text);
 }
 
 .details {

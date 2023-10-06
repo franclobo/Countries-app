@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { Input, Select } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { DataContext } from "../context/dataProvider";
+import { MdOutlineDarkMode, MdDarkMode } from "react-icons/md";
 
 export const Home = () => {
   const location = useLocation();
@@ -11,11 +12,34 @@ export const Home = () => {
     useContext(DataContext);
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [darkMode, setDarkMode] = useState(false); // Estado para rastrear el modo actual
 
   const handleSearchChange = (value) => {
-    setSearchTerm(value); // Actualiza el estado con el nuevo valor
-    // Realiza la búsqueda a medida que escribes
+    setSearchTerm(value);
     searchName(value);
+  };
+
+  const toggleDarkMode = () => {
+    const body = document.body;
+    const header = document.querySelector("header");
+
+    body.classList.toggle("light-mode");
+    header.classList.toggle("light-mode");
+
+    // Cambia el estado de darkMode
+    setDarkMode(!darkMode);
+
+    // Cambia las clases en los elementos de búsqueda y filtro
+    const searchInput = document.querySelector(".ant-input-search");
+    const filterSelect = document.querySelector(".ant-select-selection");
+
+    if (body.classList.contains("light-mode")) {
+      searchInput.classList.add("light-mode");
+      filterSelect.classList.add("light-mode");
+    } else {
+      searchInput.classList.remove("light-mode");
+      filterSelect.classList.remove("light-mode");
+    }
   };
 
   const filterOption = (input, option) =>
@@ -25,12 +49,25 @@ export const Home = () => {
     <>
       <header>
         <h1>Where in the world?</h1>
-        <p>Dark Mode</p>
+        {darkMode ? (
+          // Si está en modo oscuro, muestra el botón "Light Mode"
+          <button onClick={toggleDarkMode} className="btn__light">
+            <MdDarkMode />
+            <span>Dark Mode</span>
+          </button>
+        ) : (
+          // Si no está en modo oscuro, muestra el botón "Dark Mode"
+          <button onClick={toggleDarkMode} className="btn__dark">
+            <MdOutlineDarkMode />
+            <span>Light Mode</span>
+          </button>
+        )}
       </header>
       <main>
         {location.pathname === "/" && (
           <form>
             <Input.Search
+              className="ant-input-search"
               placeholder="Search for a country..."
               style={{
                 width: 300,
@@ -40,6 +77,7 @@ export const Home = () => {
               enterButton={<SearchOutlined />}
             />
             <Select
+              className="ant-select-selection"
               showSearch
               placeholder="Filter by Region"
               optionFilterProp="children"
