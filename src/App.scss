@@ -77,6 +77,15 @@ form {
   border-color: var(--dark-mode-elements);
 }
 
+:where(.css-dev-only-do-not-override-pr0fja)[class^="ant-input"] [class^="ant-input"],
+:where(.css-dev-only-do-not-override-pr0fja)[class*=" ant-input"] [class^="ant-input"],
+:where(.css-dev-only-do-not-override-pr0fja)[class^="ant-input"] [class*=" ant-input"],
+:where(.css-dev-only-do-not-override-pr0fja)[class*=" ant-input"] [class*=" ant-input"] {
+  box-sizing: border-box;
+  background-color: var(--dark-mode-elements);
+  color: #fff;
+}
+
 .countries {
   top: 200px;
   margin: 130px 50px 0 50px;

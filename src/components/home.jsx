@@ -1,86 +1,25 @@
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useContext, useState } from "react";
 import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
+import { Input, Select } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { Select } from "antd";
-import jsonp from "fetch-jsonp";
-import qs from "qs";
+import { DataContext } from "../context/dataProvider";
 
 export const Home = () => {
   const location = useLocation();
-  const onChange = (value) => {
-    console.log(`selected ${value}`);
-  };
-  const onSearch = (value) => {
-    console.log("search:", value);
+  const { region, searchName, filterRegion, resetData } =
+    useContext(DataContext);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchChange = (value) => {
+    setSearchTerm(value); // Actualiza el estado con el nuevo valor
+    // Realiza la búsqueda a medida que escribes
+    searchName(value);
   };
 
-  // Filter `option.label` match the user type `input`
   const filterOption = (input, option) =>
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
-
-  // Search for countries by name
-
-  let timeout;
-  let currentValue;
-  const fetch = (value, callback) => {
-    if (timeout) {
-      clearTimeout(timeout);
-      timeout = null;
-    }
-    currentValue = value;
-    const fake = () => {
-      const str = qs.stringify({
-        code: "utf-8",
-        q: value,
-      });
-      jsonp(`https://suggest.taobao.com/sug?${str}`)
-        .then((response) => response.json())
-        .then((d) => {
-          if (currentValue === value) {
-            const { result } = d;
-            const data = result.map((item) => ({
-              value: item[0],
-              text: item[0],
-            }));
-            callback(data);
-          }
-        });
-    };
-    if (value) {
-      timeout = setTimeout(fake, 300);
-    } else {
-      callback([]);
-    }
-  };
-  const SearchInput = (props) => {
-    const [data, setData] = useState([]);
-    const [value, setValue] = useState();
-    const handleSearch = (newValue) => {
-      fetch(newValue, setData);
-    };
-    const handleChange = (newValue) => {
-      setValue(newValue);
-    };
-    return (
-      <Select
-        showSearch
-        value={value}
-        placeholder={props.placeholder}
-        style={props.style}
-        defaultActiveFirstOption={false}
-        suffixIcon={<SearchOutlined style={{ color: "#fff" }} />}
-        filterOption={false}
-        onSearch={handleSearch}
-        onChange={handleChange}
-        notFoundContent={null}
-        options={(data || []).map((d) => ({
-          value: d.value,
-          label: d.text,
-        }))}
-      />
-    );
-  };
 
   return (
     <>
@@ -89,45 +28,56 @@ export const Home = () => {
         <p>Dark Mode</p>
       </header>
       <main>
-        { location.pathname === "/" && (
+        {location.pathname === "/" && (
           <form>
-          <SearchInput
-            placeholder="Search for a country..."
-            style={{
-              width: 300,
-            }}
-          />
-          <Select
-            showSearch
-            placeholder="Filter by Region"
-            optionFilterProp="children"
-            onChange={onChange}
-            onSearch={onSearch}
-            filterOption={filterOption}
-            options={[
-              {
-                value: "Africa",
-                label: "Africa",
-              },
-              {
-                value: "America",
-                label: "America",
-              },
-              {
-                value: "Asia",
-                label: "Asia",
-              },
-              {
-                value: "Europe",
-                label: "Europe",
-              },
-              {
-                value: "Oceania",
-                label: "Oceania",
-              },
-            ]}
-          />
-        </form>
+            <Input.Search
+              placeholder="Search for a country..."
+              style={{
+                width: 300,
+              }}
+              onChange={(e) => handleSearchChange(e.target.value)}
+              value={searchTerm}
+              enterButton={<SearchOutlined />}
+            />
+            <Select
+              showSearch
+              placeholder="Filter by Region"
+              optionFilterProp="children"
+              onChange={filterRegion}
+              onSearch={resetData}
+              filterOption={filterOption}
+              value={region}
+              style={{
+                width: 200,
+              }}
+              options={[
+                {
+                  value: "All countries",
+                  label: "All countries",
+                },
+                {
+                  value: "Africa",
+                  label: "Africa",
+                },
+                {
+                  value: "Americas",
+                  label: "Americas",
+                },
+                {
+                  value: "Asia",
+                  label: "Asia",
+                },
+                {
+                  value: "Europe",
+                  label: "Europe",
+                },
+                {
+                  value: "Oceania",
+                  label: "Oceania",
+                },
+              ]}
+            />
+          </form>
         )}
       </main>
     </>
@@ -137,6 +87,8 @@ export const Home = () => {
 Home.propTypes = {
   placeholder: PropTypes.string,
   style: PropTypes.object,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 Home.defaultProps = {

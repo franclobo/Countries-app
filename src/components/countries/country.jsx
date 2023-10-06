@@ -1,14 +1,9 @@
-import { useContext } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { DataContext } from '../../context/dataProvider';
+import { useContext } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { DataContext } from "../../context/dataProvider";
 
-export const Country = ({
-  name,
-  population,
-  region,
-  capital,
- }) => {
+export const Country = ({ name, population, region, capital }) => {
   const { data } = useContext(DataContext);
   const country = data.find((country) => country.name === name);
   const { flag } = country;
@@ -30,7 +25,7 @@ export const Country = ({
       </div>
     </Link>
   );
-}
+};
 
 Country.propTypes = {
   name: PropTypes.string.isRequired,

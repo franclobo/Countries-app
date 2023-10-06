@@ -1,9 +1,9 @@
-
-import { useContext, useState, useEffect } from 'react';
-import { DataContext } from '../../context/dataProvider';
-import { useParams } from 'react-router-dom';
-import { Country } from './country';
-import { BsArrowLeft } from 'react-icons/bs';
+import { useContext, useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { DataContext } from "../../context/dataProvider";
+import { useParams } from "react-router-dom";
+import { Country } from "./Country";
+import { BsArrowLeft } from "react-icons/bs";
 
 export const Details = () => {
   const { data } = useContext(DataContext);
@@ -12,16 +12,18 @@ export const Details = () => {
   const [borders, setBorders] = useState([]);
 
   useEffect(() => {
-    const country = data.find((country) => country.name === name);
-    setCountry(country);
+    const selectedCountry = data.find((country) => country.name === name);
+    setCountry(selectedCountry);
   }, [data, name]);
 
   useEffect(() => {
-    const borders = country.borders?.map((border) => {
-      const country = data.find((country) => country.alpha3Code === border);
-      return country.name;
+    const borderCountries = country.borders?.map((border) => {
+      const borderCountry = data.find(
+        (country) => country.alpha3Code === border
+      );
+      return borderCountry.name;
     });
-    setBorders(borders);
+    setBorders(borderCountries);
   }, [country, data]);
 
   const {
@@ -89,7 +91,13 @@ export const Details = () => {
             </p>
             <div className="details__borders__countries">
               {borders?.map((border) => (
-                <Country key={border} name={border} />
+                <Country
+                  key={border}
+                  name={border}
+                  population={0}
+                  region=""
+                  capital=""
+                />
               ))}
             </div>
           </div>
@@ -97,7 +105,8 @@ export const Details = () => {
       </div>
     </div>
   );
-}
+};
 
-
-
+Details.propTypes = {
+  name: PropTypes.string.isRequired,
+};
