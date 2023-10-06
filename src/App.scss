@@ -2,7 +2,7 @@
 --dark-mode-elements: hsl(209, 23%, 22%);
 --dark-mode-background: hsl(207, 26%, 17%);
 --light-mMode-text: hsl(200, 15%, 8%);
---light-mode-input: hsl(0, 0%, 52%);
+--light-mode-input: hsl(0, 0%, 91%);
 --light-mode-background: hsl(0, 0%, 98%);
 }
 
@@ -220,6 +220,7 @@ section {
     height: 50px;
     width: 120px;
   }
+
   .details__country {
     display: flex;
     justify-content: space-between;
@@ -277,4 +278,26 @@ section {
       }
     }
   }
+}
+
+.light-mode .details__btn {
+  background-color: var(--light-mode-background);
+  color: var(--light-mMode-text);
+}
+
+.light-mode .details .details__country .details__info .details__borders .details__borders__countries h2 {
+  background-color: var(--light-mode-background);
+  color: var(--light-mMode-text);
+}
+
+.light-mode .details .details__country .details__info__container p {
+  color: var(--light-mMode-text);
+}
+
+.light-mode .details .details__country .details__info h2 {
+  color: var(--light-mMode-text);
+}
+
+.light-mode .details .details__country .details__info .details__borders {
+  color: var(--light-mMode-text);
 }
