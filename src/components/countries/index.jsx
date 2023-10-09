@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { DataContext } from "../../context/dataProvider";
-import { Country } from "./Country";
+import { Country } from "./country";
 
 export const Countries = () => {
   const { data } = useContext(DataContext);
