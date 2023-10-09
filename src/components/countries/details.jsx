@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { DataContext } from "../../context/dataProvider";
 import { useParams } from "react-router-dom";
-import { Country } from "./Country";
+import { Country } from "./country";
 import { BsArrowLeft } from "react-icons/bs";
 
 export const Details = () => {
